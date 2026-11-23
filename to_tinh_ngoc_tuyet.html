@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gửi Ngọc Tuyết 💗</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#75404f;background:linear-gradient(145deg,#fff7fa,#ffe5ed);display:grid;place-items:center;padding:18px;overflow-x:hidden}
+.card{width:min(560px,100%);background:#fffdfd;border:1px solid #ffd5e1;border-radius:28px;padding:28px 22px;box-shadow:0 18px 55px #c76d8730;text-align:center;position:relative;overflow:hidden}
+h1{font-size:clamp(27px,7vw,38px);color:#d94f79;margin:10px 0}h2{color:#d94f79;margin:8px 0 14px}.sub{color:#a66a7b;line-height:1.65}.heart{font-size:48px;animation:beat 1.2s infinite}@keyframes beat{50%{transform:scale(1.13)}}
+button{border:0;border-radius:999px;padding:13px 22px;background:#e95d86;color:white;font-weight:700;font-size:16px;cursor:pointer;margin:8px;box-shadow:0 6px 15px #e95d8640}button.secondary{background:#fff0f4;color:#c34c70;border:1px solid #ffc6d6;box-shadow:none}button:active{transform:scale(.97)}
+.hidden{display:none}.meter{height:18px;border-radius:99px;background:#ffe5ed;overflow:hidden;margin:22px 0 8px}.fill{height:100%;width:0;background:linear-gradient(90deg,#ff9ab7,#e84d7b);transition:width .6s;border-radius:99px}.percent{font-weight:800;color:#d94f79}
+.question{font-size:19px;font-weight:750;margin:22px 0 12px}.answers{display:flex;flex-wrap:wrap;justify-content:center}.giftrow{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px 0}.gift{font-size:42px;background:#fff1f5;border-radius:18px;padding:14px;cursor:pointer;border:1px solid #ffd5e1}.letter{background:#fff5e9;border:1px dashed #eab58f;border-radius:16px;padding:18px;text-align:left;line-height:1.8;color:#805b50;white-space:pre-line}.date{display:inline-block;background:#fff0f4;padding:7px 15px;border-radius:99px;color:#ce5277;font-weight:700;margin:8px}.tiny{font-size:12px;color:#bd8b99;margin-top:20px}
+.confetti{position:fixed;top:-20px;animation:fall 4s linear forwards;pointer-events:none}@keyframes fall{to{transform:translateY(110vh) rotate(650deg);opacity:0}}
+</style>
+</head>
+<body>
+<main class="card">
+<section id="intro">
+  <div class="heart">💗</div>
+  <div class="date">23/3</div>
+  <h1>Gửi Lê Thị Ngọc Tuyết</h1>
+  <p class="sub">Có một điều mình muốn nói với bạn…<br>Nhưng trước tiên, hãy chơi một trò nho nhỏ nhé!</p>
+  <button onclick="start()">Bắt đầu thôi 💌</button>
+</section>
+
+<section id="quiz" class="hidden">
+  <div class="heart">🐻</div>
+  <h2>Thử thách tình cảm</h2>
+  <p class="sub">Trả lời 3 câu hỏi để mở món quà bí mật nha.</p>
+  <div class="meter"><div class="fill" id="fill"></div></div>
+  <div class="percent" id="percent">0%</div>
+  <div class="question" id="question"></div>
+  <div class="answers" id="answers"></div>
+</section>
+
+<section id="gifts" class="hidden">
+  <div class="heart">🥳</div><h1>Bạn đã mở khóa bí mật!</h1>
+  <p class="sub">Chọn một món quà để xem lời nhắn nhé.</p>
+  <div class="giftrow">
+    <div class="gift" onclick="openGift(0)">🎁</div>
+    <div class="gift" onclick="openGift(1)">💐</div>
+    <div class="gift" onclick="openGift(2)">💌</div>
+  </div>
+  <div id="gifttext" class="letter hidden"></div>
+  <button id="continue" class="hidden" onclick="showLetter()">Đọc lá thư 💗</button>
+</section>
+
+<section id="letter" class="hidden">
+  <div class="heart">💌</div><h1>Letter from my heart</h1>
+  <div class="letter">Gửi Ngọc Tuyết,
+
+Mình đã muốn nói điều này từ lâu. Mình cảm thấy bạn là một người rất đặc biệt, và mỗi lần được trò chuyện hay gặp bạn, mình đều thấy vui hơn.
+
+Mình không biết bạn nghĩ thế nào, nhưng mình muốn thành thật rằng mình có cảm tình với bạn. Mình mong có cơ hội được tìm hiểu bạn nhiều hơn, cùng chia sẻ những câu chuyện vui và những điều bình dị.
+
+Bạn không cần phải trả lời ngay đâu. Dù câu trả lời là gì, mình vẫn tôn trọng cảm xúc của bạn.
+
+Ngày 23/3 — một ngày mình muốn dành riêng để nói điều chân thành này.
+
+<strong>— Người gửi 💗</strong></div>
+  <h2 style="margin-top:22px">Ngọc Tuyết, bạn có muốn cho mình cơ hội tìm hiểu bạn không?</h2>
+  <button onclick="answer('Mình đồng ý! 💗')">Có, mình đồng ý 💗</button>
+  <button class="secondary" onclick="answer('Mình cần thêm thời gian nhé 🌷')">Mình cần thêm thời gian 🌷</button>
+  <p class="tiny">Một lời tỏ tình chân thành luôn đi cùng sự tôn trọng.</p>
+  <div id="response" class="sub"></div>
+</section>
+<p class="tiny">Made with love • 23/3</p>
+</main>
+<script>
+const qs=[
+ {q:"Điều gì làm một ngày trở nên vui hơn?",a:["Một lời hỏi thăm 😊","Một món ăn ngon 🍰","Được gặp người mình quý 💗"]},
+ {q:"Nếu nhận được một món quà bất ngờ, bạn sẽ…",a:["Mỉm cười thật tươi 🌷","Tò mò mở ngay 🎁","Cảm ơn người tặng 💌"]},
+ {q:"Bạn đã sẵn sàng mở bí mật cuối cùng chưa?",a:["Sẵn sàng! ✨","Mở thôi nào 💖","Mình muốn biết lắm! 🐻"]}
+];
+let step=0;
+function show(id){['intro','quiz','gifts','letter'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id))}
+function start(){show('quiz');render()}
+function render(){
+ document.getElementById('question').textContent=qs[step].q;
+ document.getElementById('answers').innerHTML='';
+ qs[step].a.forEach(a=>{let b=document.createElement('button');b.className='secondary';b.textContent=a;b.onclick=next;document.getElementById('answers').appendChild(b)});
+ document.getElementById('percent').textContent=Math.round(step/3*100)+'%';
+ document.getElementById('fill').style.width=(step/3*100)+'%';
+}
+function next(){step++;if(step<3)render();else{document.getElementById('percent').textContent='100%';document.getElementById('fill').style.width='100%';setTimeout(()=>show('gifts'),450)}}
+function openGift(n){
+ const msgs=['🎁 Một món quà nhỏ gửi đến bạn, mong hôm nay bạn sẽ có thật nhiều niềm vui.','💐 Chúc Ngọc Tuyết luôn vui vẻ, tự tin và gặp thật nhiều điều tốt đẹp.','💌 Có một lời nhắn đang chờ bạn… Nhấn nút bên dưới nhé!'];
+ let el=document.getElementById('gifttext');el.textContent=msgs[n];el.classList.remove('hidden');document.getElementById('continue').classList.remove('hidden');
+}
+function showLetter(){show('letter');confetti()}
+function answer(t){document.getElementById('response').textContent=t+' Cảm ơn bạn đã đọc hết lời nhắn của mình.';confetti()}
+function confetti(){for(let i=0;i<32;i++){let e=document.createElement('div');e.className='confetti';e.textContent=['💗','🌸','✨','💕'][Math.floor(Math.random()*4)];e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*1.5+'s';e.style.fontSize=(14+Math.random()*18)+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),5500)}}
+</script>
+</body>
+</html>
